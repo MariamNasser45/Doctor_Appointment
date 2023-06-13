@@ -27,7 +27,12 @@ namespace Doctor_Appointment
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
-          
+
+            //builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            //.AddEntityFrameworkStores<ApplicationDbContext>()
+            //.AddDefaultTokenProviders();
+
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.AddAuthentication().AddGoogle(options =>
             {

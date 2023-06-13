@@ -73,8 +73,8 @@ namespace Doctor_Appointment.Controllers
             .FirstOrDefault(d => d.DoctorID == Docid);
 
             ViewData["DoctorID"] = new SelectList(_context.Doctors, "DoctorID", "FullName");
-            var patient = _context.Patients.First(p => p.IdentityId == User.Claims.First().Value);
-            ViewData["PatientID"] = patient.PatientID;
+            //var patient = _context.Patients.First(p => p.IdentityId == User.FindFirst().Value);
+            //ViewData["PatientID"] = patient.PatientID;
 
             return View();
         }

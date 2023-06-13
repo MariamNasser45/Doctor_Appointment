@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
@@ -73,10 +74,19 @@ namespace Doctor_Appointment.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            //[Required]
+            //[Display(Name = "First Name")]
+            //public string FName { get; set; }
+
+            //[Required]
+            //[Display(Name = "Last Name")]
+            //public string LName { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -125,7 +135,10 @@ namespace Doctor_Appointment.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+
+                //using  new MailAddress(Input.Email).User to make username=Partbefore @ in emailAddress
+
+                await _userStore.SetUserNameAsync(user, new MailAddress(Input.Email).User , CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
